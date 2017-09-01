@@ -5,18 +5,18 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
+#include <cstdlib>
 
 class Bubble {
   public:
     Bubble();
     ~Bubble();
     bool input ( std::istream & in );
-    void print ( std::ostream & out );
-    void sort ( );
+    //void print ( std::ostream & out );
+    //void sort ( );
     
   private:
-    std::vector<std:string> info_;
+    std::vector<std::string> info_;
     std::vector<std::vector<double> > coords_;
     std::vector<double> distance_;
     int cent_atom_;
