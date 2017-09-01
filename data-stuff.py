@@ -8,15 +8,19 @@
 import numpy
 
 def main():
-  file = "nanoccapped.xyz"
+  file = "nanoccapped.old.xyz"
   fn = open(file,'r')
   x = []
   y = []
   z = []
   for i in fn.readlines():
+    i = i.strip()
     d = i.split()
-    if len(d) < 4:
+    if len(d) < 3:
+#      print d[0]
       continue
+#    else:
+#      print d[0],d[1],d[2],d[3]
     x.append(float(d[-3]))
     y.append(float(d[-2]))
     z.append(float(d[-1]))
