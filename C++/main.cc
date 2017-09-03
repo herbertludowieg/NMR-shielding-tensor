@@ -5,9 +5,9 @@
 int main( /*int argc , char * argv[]*/ ) {
   std::ifstream infile;
   infile.open("../nanoccapped.xyz");
-  Bubble first;
-  while ( first.input(infile) ) {}
+  Bubble bubble;
+  bubble.input(infile)
   //bubble.sort()
-  //buble.print(std::cout)
+  buble.print(std::cout)
   return 0;
 }
