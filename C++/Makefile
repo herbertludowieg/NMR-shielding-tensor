@@ -10,7 +10,7 @@ DEP = $(SRCS:.cc=.o)
 all: $(DEP) $(EXEC)
 
 clean:
-	rm -rf *.o $(EXEC)
+	rm -rf *.o $(EXEC) atom.bond.data
 
 $(DEP): $(SRCS)
 	$(CXX) $(CFLAGS) -c $^ -o $@
