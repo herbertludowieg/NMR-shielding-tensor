@@ -1,19 +1,22 @@
 CXX = g++
-CFLAGS = -Wall
-BUILDDIR = ./build/
-EXEC_SRC = main.cc
-SRCS := $(wildcard *.cc)
-SRCS := $(filter-out $(EXEC_SRC),$(SRCS))
+CFLAGS = -Wall -Iinclude/
+BUILDDIR = build
+SRCDIR = src
+EXEC_SRC = src/main.cc
+SRCS = $(wildcard $(SRCDIR)/*.cc)
+#SRCS := $(filter-out $(EXEC_SRC),$(SRCS))
 EXEC = main
-DEP = $(SRCS:.cc=.o)
+DEP = $(patsubst $(SRCDIR)/%.cc,$(BUILDDIR)/%.o,$(SRCS))
 
-all: $(DEP) $(EXEC)
+all: dir $(DEP) $(EXEC)
 
+dir:
+	mkdir $(BUILDDIR)
 clean:
-	rm -rf *.o $(EXEC) atom.bond.data
+	rm -rf $(BUILDDIR) $(EXEC) atom.bond.data
 
-$(DEP): $(SRCS)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cc
 	$(CXX) $(CFLAGS) -c $^ -o $@
 
 $(EXEC): $(DEP) $(EXEC_SRC)
-	$(CXX) $(CFLAGS) $(DEP) -o $@ $(EXEC_SRC)
+	$(CXX) $(CFLAGS) $(DEP) -o $@
