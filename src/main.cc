@@ -19,7 +19,7 @@ int main( ) {
   unsigned int atom = 0 , size;
   Bubble bubble;
   std::ifstream infile;
-  infile.open("../nanoccapped.xyz");
+  infile.open("nanoccapped.xyz");
   bubble.input(infile);
   infile.close();
   size = bubble.file_size()-1;
