@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "bubble.h"
+#include "tensor.h"
 
 int main( ) {
   std::ofstream out_data_file;
@@ -16,17 +17,22 @@ int main( ) {
   "# Central atom | Bond atom " << std::endl <<
   "#              | Bond atom " << std::endl;
   out_data_file.close();
-  unsigned int atom = 0 , size;
+  //unsigned int atom = 0 , size;
   Bubble bubble;
-  std::ifstream infile;
-  infile.open("nanoccapped.xyz");
-  bubble.input(infile);
-  infile.close();
-  size = bubble.file_size()-1;
+  Tensor tensor;
+  std::ifstream data;
+  data.open("nanoccapped.xyz");
+  tensor.input_coord(data);
+  data.close();
+  std::ifstream tensor_dat;
+  tensor_dat.open("tensor1.dat");
+  tensor.input_tensor(tensor_dat);
+  tensor_dat.close();
+  /*size = tensor.file_size()-1;
   while ( atom < size ) {
     bubble.sort(atom);
     atom++;
-  }
-  //bubble.print(std::cout);
+  }*/
+  tensor.points();
   return 0;
 }

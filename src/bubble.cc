@@ -3,7 +3,7 @@
 Bubble::Bubble() {}
 Bubble::~Bubble() {}
 
-bool Bubble::input ( std::istream & in ) {
+/*bool Bubble::input ( std::istream & in ) {
   std::string line;
   std::getline(in,line);
   while ( std::getline(in,line,' ') ) {
@@ -31,9 +31,10 @@ void Bubble::print ( std::ostream & out ) {
         << coords_[i][1] << ' '
         << coords_[i][2] << std::endl;
   }
-}
+}*/
 
-void Bubble::sort ( unsigned int atom ) {
+void Bubble::sort ( unsigned int atom , 
+                           std::vector<std::vector<double> > coords_) {
   std::vector<double> distance;
   std::vector<unsigned int> distance_index;
   double replace_dis = 0.;
@@ -77,8 +78,8 @@ void Bubble::sort ( unsigned int atom ) {
   std::setw(8) << " " << " | " << std::setw(8) << distance_index[2] << std::endl<<
   "-------------------" << std::endl;
   out_data_file.close();
-  bonding_atoms_.push_back(atom);
+  /*bonding_atoms_.push_back(atom);
   bonding_atoms_.push_back(distance_index[0]);
   bonding_atoms_.push_back(distance_index[1]);
-  bonding_atoms_.push_back(distance_index[2]);
+  bonding_atoms_.push_back(distance_index[2]);*/
 }
