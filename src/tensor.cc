@@ -78,12 +78,11 @@ void Tensor::points ( ) {
       point_coords_[i][2].push_back( g[i][j] * Z[i][j] );
     }
   }
-  /*for ( unsigned int i = 0 ; i < point_coords_.size() ; i++ ) {
+  for ( unsigned int i = 0 ; i < point_coords_.size() ; i++ ) {
     for ( unsigned int j = 0 ; j < point_coords_[0].size() ; j++ ) {
-      std::cout << point_coords_[i][j] << " ";
+      std::cout << point_coords_[i][0][j] << std::endl;
     }
-    std::cout << std::endl;
-  }*/
+  }
   std::ofstream dat_out;
   dat_out.open("xyz.tensor.dat");
   dat_out << "#Format for the file" << std::endl << "#x-coord y-coord z-coord" << std::endl;
