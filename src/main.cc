@@ -20,6 +20,7 @@ int main( ) {
   //unsigned int atom = 0 , size;
   Bubble bubble;
   Tensor tensor;
+  tensor.PI(3.14159265359);
   std::ifstream data;
   data.open("nanoccapped.xyz");
   tensor.input_coord(data);

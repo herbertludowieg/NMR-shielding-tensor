@@ -14,6 +14,7 @@ class Tensor {
   public:
     Tensor();
     ~Tensor();
+    void PI(double x) {pi=x;}
     unsigned int file_size () { return coords_.size(); }
     void input_coord ( std::ifstream & in );
     void input_tensor ( std::ifstream & in );
@@ -22,7 +23,7 @@ class Tensor {
                                                          int total_points );
     void points ();
 
-    const double pi = 3.14159265359;
+    double pi;
     
   private:
     std::vector<std::vector<double> > coords_ , tensor_;

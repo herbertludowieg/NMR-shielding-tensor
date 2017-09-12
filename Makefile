@@ -17,7 +17,7 @@ dir:
 	mkdir -p $(BUILDDIR)
 
 clean:
-	rm -rf $(BUILDDIR) $(EXEC) atom.bond.data xyz.tensor.dat
+	rm -rf $(BUILDDIR) $(EXEC) atom.bond.data *.tensor.dat
 	chmod -x $(PYTHON)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cc
