@@ -3,36 +3,6 @@
 Bubble::Bubble() {}
 Bubble::~Bubble() {}
 
-/*bool Bubble::input ( std::istream & in ) {
-  std::string line;
-  std::getline(in,line);
-  while ( std::getline(in,line,' ') ) {
-    coords_.push_back(std::vector<double> ());
-    info_.push_back(line);
-    std::getline(in,line,' ');
-    coords_[coords_.size()-1].push_back( std::atof( line.c_str() ) );
-    std::getline(in,line,' ');
-    coords_[coords_.size()-1].push_back( std::atof( line.c_str() ) );
-    std::getline(in,line);
-    coords_[coords_.size()-1].push_back( std::atof( line.c_str() ) );
-  }
-  if ( line == "" ) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-void Bubble::print ( std::ostream & out ) {
-  out << "Inputted data" << std::endl;
-  for ( unsigned int i = 0 ; i < coords_.size() ; i++ ) {
-    out << info_[i] << ' '
-        << coords_[i][0] << ' '
-        << coords_[i][1] << ' '
-        << coords_[i][2] << std::endl;
-  }
-}*/
-
 void Bubble::sort ( unsigned int atom , 
                            std::vector<std::vector<double> > coords_) {
   std::vector<double> distance;
@@ -65,10 +35,6 @@ void Bubble::sort ( unsigned int atom ,
       }
     }
   }
-  /*std::cout << "Organized data for atom 1" << std::endl;
-  for ( unsigned int i = 0 ; i < distance.size() ; i++ ) {
-    std::cout << distance[i] << ' ' << distance_index[i] << std::endl;
-  }*/
   std::ofstream out_data_file;
   out_data_file.open("atom.bond.data",std::ios_base::app);
   out_data_file <<
@@ -78,8 +44,4 @@ void Bubble::sort ( unsigned int atom ,
   std::setw(8) << " " << " | " << std::setw(8) << distance_index[2] << std::endl<<
   "-------------------" << std::endl;
   out_data_file.close();
-  /*bonding_atoms_.push_back(atom);
-  bonding_atoms_.push_back(distance_index[0]);
-  bonding_atoms_.push_back(distance_index[1]);
-  bonding_atoms_.push_back(distance_index[2]);*/
 }
