@@ -21,14 +21,16 @@ class Tensor {
     double multiplication ( double x , double y , double z );
     std::vector<double> linspace ( double start , double end , 
                                                          int total_points );
+    void init_theta_phi ( int points );
     void points ();
 
     double pi;
     
   private:
     std::vector<std::vector<double> > coords_ , tensor_;
-    std::vector<std::vector<std::vector<double> > > point_coords_;
+    std::vector<std::vector<std::vector<std::vector<double> > > > point_coords_;
     std::vector<std::string> info_;
+    std::vector<double> phi_,theta_;
 };
 
 #endif

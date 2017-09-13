@@ -21,6 +21,7 @@ int main( ) {
   Bubble bubble;
   Tensor tensor;
   tensor.PI(3.14159265359);
+  tensor.init_theta_phi(5000);
   std::ifstream data;
   data.open("nanoccapped.xyz");
   tensor.input_coord(data);
