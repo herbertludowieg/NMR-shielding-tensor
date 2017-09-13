@@ -21,11 +21,10 @@ def main():
   X = open_file("x.tensor.dat")
   Y = open_file("y.tensor.dat")
   Z = open_file("z.tensor.dat")
-  print len(Z),len(Z[0])
   fig = plt.figure()
   
   ax = Axes3D(fig)
-  cset = ax.contour(X,Y,Z)
+  cset = ax.contour(X,Y,Z,20)
   
 #  ax = fig.add_subplot(111,projection='3d')
 #  cset = ax.plot_surface(X,Y,Z)
