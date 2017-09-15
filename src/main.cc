@@ -2,39 +2,30 @@
 #include <string>
 #include "bubble.h"
 #include "tensor.h"
+#include "structure.h"
 
 int main( ) {
-  std::ofstream out_data_file;
-  out_data_file.open("atom.bond.data");
-  out_data_file << 
-  "# This file will contain the organized data for the molecule" << std::endl <<
-  "# with the indeces of the closes bonding atoms and the central" << std::endl <<
-  "# atom to which they bond to. This is done with the assumption" << std::endl <<
-  "# of how many atoms will bond together. This will probably" << std::endl << 
-  "# change to make the program more general." << std::endl <<
-  "# The file format is as follows" << std::endl <<
-  "#              | Bond atom " << std::endl <<
-  "# Central atom | Bond atom " << std::endl <<
-  "#              | Bond atom " << std::endl;
-  out_data_file.close();
-  //unsigned int atom = 0 , size;
-  Bubble bubble;
   Tensor tensor;
+  Structure struc;
+  unsigned int atom = 138;
+
   tensor.PI(3.14159265359);
-  tensor.init_theta_phi(5000);
+  tensor.init_theta_phi(250);
+
   std::ifstream data;
   data.open("nanoccapped.xyz");
-  tensor.input_coord(data);
+  struc.input_coord(data);
   data.close();
-  std::ifstream tensor_dat;
-  tensor_dat.open("tensor1.dat");
-  tensor.input_tensor(tensor_dat);
-  tensor_dat.close();
-  /*size = tensor.file_size()-1;
-  while ( atom < size ) {
-    bubble.sort(atom);
-    atom++;
-  }*/
-  tensor.points();
+  //struc.print(std::cout);
+  std::vector<double> coordinates;
+  coordinates = struc.get_coord(atom);
+  std::cout << coordinates[0] << " " << coordinates[1] << " " 
+            << coordinates[2] << std::endl;
+
+  data.open("tensor1.dat");
+  tensor.input_tensor(data);
+  data.close();
+  tensor.points(coordinates);
+
   return 0;
 }

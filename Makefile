@@ -8,7 +8,7 @@ SRCS = $(wildcard $(SRCDIR)/*.cc)
 EXEC = main
 DEP = $(patsubst $(SRCDIR)/%.cc,$(BUILDDIR)/%.o,$(SRCS))
 
-all: execpy dir $(DEP) $(EXEC)
+all: dir $(DEP) $(EXEC)
 
 execpy: $(PYTHON)
 	chmod +x $^
@@ -17,7 +17,7 @@ dir:
 	mkdir -p $(BUILDDIR)
 
 clean:
-	rm -rf $(BUILDDIR) $(EXEC) atom.bond.data *.tensor.dat
+	rm -rf $(BUILDDIR) $(EXEC) atom.bond.data *.tensor.dat *.structure.dat
 	chmod -x $(PYTHON)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cc

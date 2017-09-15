@@ -24,7 +24,8 @@ def main():
   fig = plt.figure()
   
   ax = Axes3D(fig)
-  cset = ax.contour(X,Y,Z,20)
+  cset = ax.plot_surface(X,Y,Z)
+
   
 #  ax = fig.add_subplot(111,projection='3d')
 #  cset = ax.plot_surface(X,Y,Z)
