@@ -16,11 +16,11 @@ int main( ) {
   data.open("nanoccapped.xyz");
   struc.input_coord(data);
   data.close();
-  //struc.print(std::cout);
+  struc.print(std::cout);
   std::vector<double> coordinates;
   coordinates = struc.get_coord(atom);
-  std::cout << coordinates[0] << " " << coordinates[1] << " " 
-            << coordinates[2] << std::endl;
+  //std::cout << coordinates[0] << " " << coordinates[1] << " " 
+  //          << coordinates[2] << std::endl;
 
   data.open("tensor1.dat");
   tensor.input_tensor(data);

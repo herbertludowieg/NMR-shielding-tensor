@@ -20,7 +20,7 @@ void Tensor::input_tensor ( std::ifstream & in ) {
 //   described in the README.md file
 double Tensor::multiplication ( double x , double y , double z ) {
   return (x*x*tensor_[0][0]+y*y*tensor_[1][1]+z*z*tensor_[2][2]+
-         x*y*tensor_[0][1]+x*z*tensor_[0][2]+y*z*tensor_[1][2])*0.01;
+          x*y*tensor_[0][1]+x*z*tensor_[0][2]+y*z*tensor_[1][2])*0.01;
 }
 
 // A function that copies the numpy.linspace function in Python
