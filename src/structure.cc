@@ -10,7 +10,6 @@ void Structure::input_coord ( std::ifstream & in ) {
   std::getline(in,line);
   while ( std::getline(in,line,' ') ) {
     coords_.push_back(std::vector<double> ());
-    //info_.push_back(line);
     std::getline(in,line,' ');
     coords_[coords_.size()-1].push_back( std::atof( line.c_str() ) );
     std::getline(in,line,' ');
@@ -40,12 +39,6 @@ void Structure::print ( std::ostream & out ) {
       bonds[atom].push_back( x[i] );
     }
   }
-  /*for ( unsigned int i = 0 ; i < coords_.size() ; i++ ) {
-    std::cout << i << std::endl;
-    std::cout << bonds[i][0] << " " << bonds[i][1] << " " << bonds[i][2]
-              << " " << bonds[i][3] << std::endl;
-    
-  }*/
   for ( unsigned int i = 0 ; i < bonds.size() ; i++ ) {
     int compare = bonds[i][0];
     //std::cout<<i<<std::endl;
@@ -63,10 +56,6 @@ void Structure::print ( std::ostream & out ) {
       }
     }
   }
-  /*for ( unsigned int i = 0 ; i < coords_.size() ; i++ ) {
-    std::cout << bonds[i][0] << " " << bonds[i][1] << " " << bonds[i][2]
-              << " " << bonds[i][3] << std::endl;
-  }*/
   data.open("sorted.structure.dat");
   data.close();
   data.open("sorted.structure.dat",std::ios_base::app);
