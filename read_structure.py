@@ -46,14 +46,15 @@ def main():
   tens_z = open_file("z.tensor.dat")
   fig = plt.figure()
   ax = Axes3D(fig)
-  ax.scatter(coordt[0],coordt[2],coordt[1],c='b')
+  #ax.scatter(coordt[0],coordt[2],coordt[1],c='b')
   ax.plot_surface(tens_x,tens_z,tens_y)
   for i in range(len(bonds)):
     for j in range(1,len(bonds[i])):
+      #print i,bonds[i]
       x = [coord[bonds[i][0]][0],coord[bonds[i][j]][0]]
       y = [coord[bonds[i][0]][1],coord[bonds[i][j]][1]]
       z = [coord[bonds[i][0]][2],coord[bonds[i][j]][2]]
-      ax.plot(x,z,y,'-b')
+      ax.plot(x,z,y,'-bo')
   plt.show()
 
 main()
