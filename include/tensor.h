@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <iomanip>
-#include "bubble.h"
+#include "linearalgebra.h"
 
 class Tensor {
   public:

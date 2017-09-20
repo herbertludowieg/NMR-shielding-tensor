@@ -7,6 +7,7 @@ std::vector<int> Bubble::sort ( unsigned int atom ,
                            std::vector<std::vector<double> > coords_) {
   std::vector<double> distance;
   std::vector<unsigned int> distance_index;
+  std::cout<<atom<<std::endl;
   double replace_dis = 0.;
   unsigned int replace_index = 0;
   for ( unsigned int i = 0 ; i < coords_.size() ; i++ ) {
@@ -20,7 +21,7 @@ std::vector<int> Bubble::sort ( unsigned int atom ,
                    std::pow((coords_[atom][2]-coords_[i][2]),2)));
   }
   for ( unsigned int i = 0 ; i < distance.size() ; i++ ) {
-    std::cout << "bubble "<<i<<" "<<distance.size()<<std::endl;
+    std::cout << "bubble "<<i<<" "<<distance.size()<<" "<<atom<<std::endl;
     for ( unsigned int j = 1 ; j < distance.size()-i ; j++ ) {
       replace_dis = 0.;
       replace_index = 0;
