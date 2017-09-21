@@ -33,7 +33,6 @@ void Structure::print ( std::ostream & out ) {
   std::vector<std::vector<int> > bonds;
   Bubble bubble;
   for ( unsigned int atom = 0 ; atom < coords_.size() ; atom++ ) {
-    std::cout<<atom<<std::endl;
     bonds.push_back( std::vector<int> () );
     x = bubble.sort(atom,coords_);
     for ( unsigned int i = 0 ; i < x.size() ; i++ ) {

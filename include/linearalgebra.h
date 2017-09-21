@@ -4,12 +4,14 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <iomanip>
 
 class LinearAlgebra {
 
   public:
     LinearAlgebra();
     ~LinearAlgebra();
+    void print_matrix ( std::vector<std::vector<double> > a );
     std::vector<std::vector<double> > transpose ( 
                                std::vector<std::vector<double> > matrix );
     std::vector<double> eigenvalues ( );
@@ -22,9 +24,9 @@ class LinearAlgebra {
                                                     std::vector<double> b );
     double dotProduct ( std::vector<double> a , std::vector<double> b );
     double signFunction ( double x );
-    std::vector<std::vector<double> > multMatrix ( 
-                           std::vector<std::vector<double> > left ,
-                           std::vector<std::vector<double> > right );
+    std::vector<double> multMatrix ( 
+                           std::vector<double> left ,
+                           std::vector<double> right );
 
 };
 

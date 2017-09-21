@@ -11,7 +11,7 @@ void Tensor::input_tensor ( std::ifstream & in ) {
     tensor_[tensor_.size()-1].push_back( std::atof( line.c_str() ) );
     std::getline(in,line,' ');
     tensor_[tensor_.size()-1].push_back( std::atof( line.c_str() ) );
-    std::getline(in,line,' ');
+    std::getline(in,line);
     tensor_[tensor_.size()-1].push_back( std::atof( line.c_str() ) );
   }
 }
@@ -80,7 +80,7 @@ void Tensor::points ( std::vector<double> coordinates ) {
                                               + coordinates[2];
     }
   }
-  std::cout<<"yay"<<std::endl;
+  //std::cout<<"yay"<<std::endl;
   //write to files
   std::ofstream dat_out;
   dat_out.open("x.tensor.dat");
@@ -120,28 +120,20 @@ void Tensor::points ( std::vector<double> coordinates ) {
   }
   dat_out.close();
   LinearAlgebra linear;
-  std::cout<<"yay"<<std::endl;
-  double a[] = {4,1,-2,2},b[] = {1,2,0,1},c[] = {-2,0,3,2},d[] = {2,1,3,1};
-  std::vector<std::vector<double> > matrix;
+  double a[] = {4,1,-2,2},b[] = {1,2,0,1},c[] = {-2,0,3,-2},d[] = {2,1,-2,-1};
+  std::vector<std::vector<double> > matrix(4,std::vector<double>(4));
   
-  std::cout<<"yay"<<std::endl;
-  matrix.push_back(std::vector<double>(4));
-  /*matrix.push_back(b);
-  matrix.push_back(c);
-  matrix.push_back(d);*/
-  std::cout<<"yay"<<std::endl;
   for ( unsigned int i = 0 ; i < 4 ; i++ ) {
-    matrix[0].push_back(a[i]);
-    matrix[1].push_back(b[i]);
-    matrix[2].push_back(c[i]);
-    matrix[3].push_back(d[i]);
+    matrix[0][i] = a[i];
+    matrix[1][i] = b[i];
+    matrix[2][i] = c[i];
+    matrix[3][i] = d[i];
   }
-  std::cout<<"yay"<<std::endl;
   std::vector<std::vector<double> > similaritytrans;
-  similaritytrans = linear.householder(matrix);
+  similaritytrans = linear.householder(tensor_);
   for ( unsigned int i = 0 ; i < similaritytrans.size() ; i++ ) {
     for ( unsigned int j = 0 ; j < similaritytrans[i].size() ; j++ ) {
-      std::cout << similaritytrans[i][j] << " ";
+      std::cout << std::setw(15) << similaritytrans[i][j] << " ";
     }
     std::cout<<std::endl;
   }
