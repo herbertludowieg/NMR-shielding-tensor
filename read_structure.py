@@ -44,10 +44,20 @@ def main():
   tens_x = open_file("x.tensor.dat")
   tens_y = open_file("y.tensor.dat")
   tens_z = open_file("z.tensor.dat")
+  number_figs = len(tens_x) / len(tens_x[0])
+  print len(tens_x[0]),len(tens_x)
+  i = 0
+
   fig = plt.figure()
   ax = Axes3D(fig)
+  print max(coordt[0])/max(coordt[2])
+  ax.set_aspect(0.1)
   #ax.scatter(coordt[0],coordt[2],coordt[1],c='b')
-  ax.plot_surface(tens_x,tens_z,tens_y)
+  while ( i < number_figs ):
+    ax.plot_surface(tens_x[i*len(tens_x[0]):(i+1)*len(tens_x[0])-1], \
+                    tens_z[i*len(tens_z[0]):(i+1)*len(tens_z[0])-1], \
+                    tens_y[i*len(tens_y[0]):(i+1)*len(tens_y[0])-1])
+    i+=1
   for i in range(len(bonds)):
     for j in range(1,len(bonds[i])):
       #print i,bonds[i]

@@ -21,11 +21,14 @@ def main():
   X = open_file("x.tensor.dat")
   Y = open_file("y.tensor.dat")
   Z = open_file("z.tensor.dat")
-  fig = plt.figure()
+  totFigs = len(X) / len(X[0])
+  for i in range(totFigs):
+    fig = plt.figure(i+1)
   
-  ax = Axes3D(fig)
-  cset = ax.plot_surface(X,Y,Z)
-
+    ax = Axes3D(fig)
+    cset = ax.plot_surface(X[i*len(X[0]):(i+1)*len(X[0])], \
+                           Y[i*len(Y[0]):(i+1)*len(Y[0])], \
+                           Z[i*len(Z[0]):(i+1)*len(Z[0])])
   
 #  ax = fig.add_subplot(111,projection='3d')
 #  cset = ax.plot_surface(X,Y,Z)

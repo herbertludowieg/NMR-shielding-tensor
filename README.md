@@ -11,6 +11,30 @@ The requirements for this program are as follows:
 	C++ compiler
 	Python 2.x
 
+--------------------------------COMPILING---------------------------------------
+To compile the code a Makefile has been provided with some preset values for 
+compiling C++ code with the g++ compiler. It will create a main executable on 
+the same directory as the Makefile. 
+There also exists a function in the Makefile to allow the .py files to run as 
+an executable. To do this type
+$ make execpy
+and it will add executable permissions to all .py files on the directory.
+Running the clean function for make will erase all files created by the program.
+
+---------------------------RUNNING THE PROGRAM----------------------------------
+To execute the program run the main executable which will write all of the data 
+to pre-determined files.
+To plot the structure run the python script read_structure.py. The code was 
+tested with matplotlib 0.99, 1.1 and 1.5.1. Ran well on all versions mentioned.
+
+-------------------------------LIMITATIONS--------------------------------------
+This should just serve as a friendly reminder; it has been harcoded into 
+the program that for the tensor a 250x250 matrix of doubles is being calculated 
+for each x, y and z coordinate. It was tested for a single tensor with n=5000
+matrices and the C++ code was able to complete utilizing about 1GB of RAM.
+However, python would not be able to plot the data before running out of 
+memory.
+
 -----------------------------ACKNOWLEDGEMENTS-----------------------------------
 [1] Zurek, E.; Pickard, C.; Autschbach, J., 'A Density Functional Study of the 
     13C NMR Chemical Shifts in Single-Walled Carbon Nanotubes with Stone-Wales

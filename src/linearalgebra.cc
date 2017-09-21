@@ -76,7 +76,7 @@ std::vector<double> LinearAlgebra::multMatrix (
 }
 
 void LinearAlgebra::print_matrix ( std::vector<std::vector<double> > a ) {
-  std::cout << "Printing matrix" << std::endl;
+  std::cout << "Printing matrix after Householder's method" << std::endl;
   for ( unsigned int i = 0 ; i < a.size() ; i++ ) {
     for ( unsigned int j = 0 ; j < a[0].size() ; j++ ) {
       std::cout << std::setw(15) << a[i][j] << " ";
@@ -127,7 +127,7 @@ std::vector<std::vector<double> > LinearAlgebra::householder (
     //std::cout<<"matrix before op"<<std::endl;
     //print_matrix(b_matrix);
     b_matrix = transpose(b_matrix);
-    std::cout<<std::endl<<"New matrix products"<<std::endl;
+    std::cout<<std::endl<<"Matrix after Householder's method"<<std::endl;
     for ( j = 0 ; j < b_matrix.size() ; j++ ) {
       for ( m = 0 ; m < b_matrix.size() ; m++ ) {
         c_matrix[j][m] = dotProduct(P[j],b_matrix[m]);
