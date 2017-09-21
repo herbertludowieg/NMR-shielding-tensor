@@ -8,7 +8,7 @@ double LinearAlgebra::signFunction ( double x ) {
     return 1.;
   } else if ( x < 0. ) {
     return -1.;
-  } else if ( x == 0. ) {
+  } else {
     return 0.;
   }
 }
@@ -52,9 +52,9 @@ double LinearAlgebra::dotProduct( std::vector<double> a ,
 
 std::vector<std::vector<double> > LinearAlgebra::getIdentity ( int rows ) {
   std::vector<std::vector<double> > identity;
-  for ( unsigned int i = 0 ; i < rows ; i++ ) {
+  for ( unsigned int i = 0 ; (int)i < rows ; i++ ) {
     identity.push_back( std::vector<double> () );
-    for ( unsigned int j = 0 ; j < rows ; j++ ) {
+    for ( unsigned int j = 0 ; (int)j < rows ; j++ ) {
       if ( j == i ) {
         identity[i].push_back(1.);
       } else {
