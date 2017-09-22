@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+import sys
+if sys.version[0] == '3':
+  import matplotlib
+  matplotlib.use("TkAgg")
+
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
@@ -48,7 +53,8 @@ def main():
 
 
   fig = plt.figure()
-  ax = Axes3D(fig)
+  #ax = Axes3D(fig)
+  ax = fig.add_subplot(111,projection='3d')
   ax.set_aspect(1)
   ax.scatter(coordt[0],coordt[2],coordt[1],c='b')
   for i in range(len(bonds)):
