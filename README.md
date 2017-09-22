@@ -9,7 +9,7 @@ can be found in the link below.
 The requirements for this program are as follows:
 	Make
 	C++ compiler
-	Python 2.x
+	Python
 
 --------------------------------COMPILING---------------------------------------
 To compile the code a Makefile has been provided with some preset values for 
