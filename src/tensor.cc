@@ -33,7 +33,7 @@ double Tensor::multiplication ( double x , double y , double z ,
                                                       unsigned int ten_fn ) {
   return (x*x*tensor_[ten_fn][0][0]+y*y*tensor_[ten_fn][1][1]+
           z*z*tensor_[ten_fn][2][2]+2*x*y*tensor_[ten_fn][0][1]+
-          2*x*z*tensor_[ten_fn][0][2]+2*y*z*tensor_[ten_fn][1][2])*0.01;
+          2*x*z*tensor_[ten_fn][0][2]+2*y*z*tensor_[ten_fn][1][2])*0.03;
 }
 
 // A function that copies the numpy.linspace function in Python
@@ -136,6 +136,8 @@ void Tensor::points ( std::vector<double> coordinates , unsigned int ten_fn ) {
   }*/
   std::vector<std::vector<double> > similaritytrans;
   similaritytrans = linear.householder(tensor_[ten_fn]);
+  //similaritytrans = linear.householder(matrix);
+  std::cout << "Matrix after Householder's method"<<std::endl;
   for ( unsigned int i = 0 ; i < similaritytrans.size() ; i++ ) {
     for ( unsigned int j = 0 ; j < similaritytrans[i].size() ; j++ ) {
       std::cout << std::setw(8) << similaritytrans[i][j] << " ";

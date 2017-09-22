@@ -40,12 +40,9 @@ std::vector<std::vector<double> > LinearAlgebra::dyadProduct (
 
 double LinearAlgebra::dotProduct( std::vector<double> a , 
                                   std::vector<double> b ) {
-  double dot;
+  double dot = 0.;
   for ( unsigned int i = 0 ; i < a.size() ; i++ ) {
-    //for ( unsigned int j = 0 ; j < b.size() ; j++ ) {
-      //std::cout<<a[i]<<" "<<b[i]<<std::endl;
-      dot = dot + a[i]*b[i];
-    //}
+    dot = dot + a[i]*b[i];
   }
   return dot;
 }
@@ -115,32 +112,20 @@ std::vector<std::vector<double> > LinearAlgebra::householder (
       }
     }
     dyad = dyadProduct(w,w);
-    //std::cout<<"Dyad"<<std::endl;
-    //print_matrix(dyad);
     for ( j = 0 ; j < dyad.size() ; j++ ) {
       for ( m = 0 ; m < dyad[j].size() ; m++ ) {
         P[j][m] = identity[j][m]-2*dyad[j][m];
       }
     }
-    //std::cout<<"P matrix"<<std::endl;
-    //print_matrix(P);
-    //std::cout<<"matrix before op"<<std::endl;
-    //print_matrix(b_matrix);
     b_matrix = transpose(b_matrix);
-    std::cout<<std::endl<<"Matrix after Householder's method"<<std::endl;
     for ( j = 0 ; j < b_matrix.size() ; j++ ) {
       for ( m = 0 ; m < b_matrix.size() ; m++ ) {
         c_matrix[j][m] = dotProduct(P[j],b_matrix[m]);
-        //std::cout << P[j][0] << " " << P[j][1] << " " << P[j][2] << " " 
-        //          << std::endl;
-        //std::cout << b_matrix[m][0] << " " << b_matrix[m][1] << " " << b_matrix[m][2] << " " 
-        //          << std::endl;
         if ( std::abs(c_matrix[j][m]) <= tol ) {
           c_matrix[j][m] = 0.;
         }
       }
     }
-    //print_matrix(c_matrix);
     P = transpose(P);
     for ( j = 0 ; j < b_matrix.size() ; j++ ) {
       for ( m = 0 ; m < b_matrix.size() ; m++ ) {
@@ -150,7 +135,6 @@ std::vector<std::vector<double> > LinearAlgebra::householder (
         }
       }
     }
-    //print_matrix(b_matrix);
   }
   return b_matrix;
 }
