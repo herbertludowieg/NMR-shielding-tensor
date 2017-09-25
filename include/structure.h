@@ -14,6 +14,7 @@ class Structure {
     ~Structure ();
     void input_coord ( std::ifstream & in );
     void print ( std::ostream & out );
+    unsigned int coord_size () {return coords_.size();}
     std::vector<double> get_coord ( unsigned int atom );
 
   private:
