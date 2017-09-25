@@ -27,6 +27,8 @@ class LinearAlgebra {
     std::vector<double> multMatrix ( 
                            std::vector<double> left ,
                            std::vector<double> right );
+    std::vector<std::vector<double> > qrMethod ( 
+                              std::vector<std::vector<double> > matrix );
 
 };
 
