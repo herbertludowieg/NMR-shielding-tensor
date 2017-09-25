@@ -8,6 +8,7 @@ int main( ) {
   Structure struc;
   bool coord_found = false;
   std::string coord_file , line;
+  std::vector<double> coordinates;
   while ( !coord_found ) {
     std::cout << "Enter location of coordinate file: ";
     std::getline(std::cin,line);
@@ -70,6 +71,12 @@ int main( ) {
       continue;
     }
     atom[i] = (unsigned int)std::atoi(line.c_str())-1;
+    coordinates = struc.get_coord(atom[i]);
+    std::cout << "Atom coordinates:";
+    for ( unsigned int j = 0 ; j < coordinates.size() ; j++ ) {
+      std::cout << " " << coordinates[j];
+    }
+    std::cout << std::endl;
   }
   
   std::ofstream dat_out;
@@ -97,7 +104,7 @@ int main( ) {
   struc.print(std::cout);
   for ( unsigned int i = 0 ; i < number ; i++ ) {
     //std::cout << files[i] << std::endl;
-    std::vector<double> coordinates;
+
     coordinates = struc.get_coord(atom[i]);
     data.open(files[i].c_str());
     tensor.input_tensor(data);
