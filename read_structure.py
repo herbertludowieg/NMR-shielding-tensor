@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys
+# In order to make python3 work
 if sys.version[0] == '3':
   import matplotlib
   matplotlib.use("TkAgg")
@@ -43,20 +44,27 @@ def transpose(x):
   return y
 
 def main():
+  # opens the files created with the C++ script
   coord = open_file("coordinates.structure.dat")
+  # to make python happy
   coordt = transpose(coord)
+
   bonds = open_file_bonds("sorted.structure.dat")
   tens_x = open_file("x.tensor.dat")
   tens_y = open_file("y.tensor.dat")
   tens_z = open_file("z.tensor.dat")
+  # finds out how many tensors were calculated based on the size of the data
   number_figs = len(tens_x) / len(tens_x[0])
 
 
   fig = plt.figure()
-  #ax = Axes3D(fig)
-  ax = fig.add_subplot(111,projection='3d')
+  ax = Axes3D(fig)
+  #ax = fig.add_subplot(111,projection='3d')
   ax.set_aspect(1)
   ax.scatter(coordt[0],coordt[2],coordt[1],c='b')
+  # will make a line that signifies a bond in the structure
+  # bonds is a file that comes from sorting and finding the closest atoms
+  # with the C++ script
   for i in range(len(bonds)):
     for j in range(1,len(bonds[i])):
       #print i,bonds[i]

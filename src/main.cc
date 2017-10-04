@@ -80,9 +80,13 @@ int main( ) {
   }
   
   std::ofstream dat_out;
+
+  int points;
+  std::cout << "Enter number of points to use for the tensor plot: ";
+  std::cin >> points;
   
   tensor.PI(3.14159265359);
-  tensor.init_theta_phi(250);
+  tensor.init_theta_phi(points);
 
   dat_out.open("x.tensor.dat");
   dat_out << "#This file only has the x coordinate for the 3d plot" << std::endl
