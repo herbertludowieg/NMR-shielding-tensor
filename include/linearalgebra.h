@@ -28,8 +28,12 @@ class LinearAlgebra {
                            std::vector<double> left ,
                            std::vector<double> right );
     std::vector<std::vector<double> > qrMethod ( 
+<<<<<<< HEAD
                            std::vector<std::vector<double> > matrix );
     bool upperTriangular ( std::vector<std::vector<double> > matrix );
+=======
+                              std::vector<std::vector<double> > matrix );
+>>>>>>> 00f4e914551bfa0ef3697be91f14e8560484e53f
 
 };
 
