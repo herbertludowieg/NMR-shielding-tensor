@@ -40,7 +40,7 @@ double Tensor::multiplication ( double x , double y , double z ,
 std::vector<double> Tensor::linspace ( double start , double end , 
                                                           int total_points) {
   std::vector<double> linear_space;
-  for ( int i = 0 ; i < total_points ; i++ ) {
+  for ( int i = 0 ; i <= total_points ; i++ ) {
     linear_space.push_back( start + (double)i * (end-start) 
                                                      / (double)total_points);
   }
@@ -152,4 +152,17 @@ void Tensor::points ( std::vector<double> coordinates , unsigned int ten_fn ) {
       std::cout << std::setw(15) << e_values[i] << " ";
   }
   std::cout<<std::endl;
+  std::vector<double> eigenvector(tensor_[ten_fn].size()) , 
+                      guess(tensor_[ten_fn].size());
+  guess[0]=0.5;guess[1]=1;guess[2]=1;
+  std::cout << "--------------------------------------------------"
+            << std::endl;
+  for ( unsigned int j = 0 ; j < e_values.size() ; j++ ) {
+    eigenvector = linear.gauss_seidel(tensor_[ten_fn],e_values[j],guess);
+    std::cout << "Eigenvector for eigenvalue: " << e_values[j] << std::endl;
+    for ( unsigned int i = 0 ; i < eigenvector.size() ; i++ ) {
+      std::cout << std::setw(15) << eigenvector[i] << " ";
+    }
+    std::cout<<std::endl<<std::endl;
+  }
 }

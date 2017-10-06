@@ -231,3 +231,54 @@ std::vector<std::vector<double> > LinearAlgebra::qrMethod (
   print_matrix(A);
   return A;
 }
+
+std::vector<double> LinearAlgebra::gauss_seidel ( 
+                            std::vector<std::vector<double> > matrix ,
+                            double eigenvalue , std::vector<double> guess ) {
+  bool retry = true;
+  double tol = 1e-12 , trivialCheck = 0 , sum , accuracyCheck = 0;
+  std::vector<double> eigenvector(guess.size()) , difference(guess.size());
+  unsigned int i , j , maxIteration = 100 , count = 0;
+  eigenvector = guess;
+  for ( i = 0 ; i < eigenvector.size() ; i++ ) {
+    trivialCheck = trivialCheck + std::abs(eigenvector[i]);
+  }
+  if ( trivialCheck <= tol ) {
+    std::cout << "ERROR: "<<std::endl<<"\tTrivial guess entered"<<std::endl
+              << "\tWill use the guess 1,1,1" << std::endl;
+    for ( i = 0 ; i < eigenvector.size() ; i++ ) {
+      eigenvector[i] = 1;
+    }
+  }
+  difference = eigenvector;
+  while ( retry ) {
+    std::cout<<count<<" "<<accuracyCheck<<std::endl;
+    accuracyCheck = 0;
+    std::cout << eigenvector[0] << " " << eigenvector[1] << " "<< eigenvector[2] << std::endl;
+    for ( i = 0 ; i < matrix.size() ; i++ ) {
+      sum = 0;
+      for ( j = 0 ; j < matrix[i].size() ; j++ ) {
+        if ( j == i ) {
+         continue;
+        }
+        sum = sum + matrix[i][j]*eigenvector[j];
+      }
+      eigenvector[i] = sum / (eigenvalue - matrix[i][i]);
+    }
+    for ( i = 0 ; i < eigenvector.size() ; i++ ) {
+      accuracyCheck = accuracyCheck + (std::abs(difference[i]-eigenvector[i]));
+    }
+    if ( accuracyCheck <= tol ) {
+      retry = false;
+    } else {
+      difference = eigenvector;
+    }
+    if ( count >= maxIteration ) {
+      std::cout << "ERROR: max iterations reached" << std::endl;
+      std::cout << "accuracy = " << accuracyCheck << std::endl;
+      return eigenvector;
+    }
+    count++;
+  }
+  return eigenvector;
+}

@@ -28,6 +28,9 @@ class LinearAlgebra {
     std::vector<std::vector<double> > qrMethod ( 
                            std::vector<std::vector<double> > matrix );
     //bool upperTriangular ( std::vector<std::vector<double> > matrix );
+    std::vector<double> gauss_seidel ( 
+                                std::vector<std::vector<double> > matrix , 
+                                double eigenvalue , std::vector<double> guess );
 
 };
 
