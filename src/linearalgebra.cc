@@ -3,6 +3,17 @@
 LinearAlgebra::LinearAlgebra() {}
 LinearAlgebra::~LinearAlgebra() {}
 
+std::vector<double> LinearAlgebra::eigenvalues ( 
+                                  std::vector<std::vector<double> > matrix ) {
+  std::vector<double> values(matrix.size());
+  matrix = householder(matrix);
+  matrix = qrMethod(matrix);
+  for ( unsigned int i = 0 ; i < matrix.size() ; i++ ) {
+    values[i] = matrix[i][i];
+  }
+  return values;
+}
+
 double LinearAlgebra::signFunction ( double x ) {
   if ( x > 0. ) {
     return 1.;
@@ -62,19 +73,9 @@ std::vector<std::vector<double> > LinearAlgebra::getIdentity ( int rows ) {
   return identity;
 }
 
-std::vector<double> LinearAlgebra::multMatrix ( 
-                                  std::vector<double> left,
-                                  std::vector<double> right ) {
-  std::vector<double> matrixmult ( left.size() );
-  for ( unsigned int i = 0 ; i < left.size() ; i++ ) {
-    matrixmult[i] = dotProduct(left,right);
-  }
-  return matrixmult;
-}
-
-bool LinearAlgebra::upperTriangular ( 
+/*bool LinearAlgebra::upperTriangular ( 
                          std::vector<std::vector<double> > matrix ) {
-  double tol = 1e-8 , sum;
+  double tol = 1e-12 , sum;
   for ( unsigned int i = 0 ; i < matrix.size()-1 ; i++ ) {
     sum = 0.;
     for ( unsigned int k = i+1 ; k < matrix[i].size() ; k++ ) {
@@ -87,10 +88,9 @@ bool LinearAlgebra::upperTriangular (
   }
   std::cout << "Matrix is diagonal" << std::endl;
   return true;
-}
+}*/
 
 void LinearAlgebra::print_matrix ( std::vector<std::vector<double> > a ) {
-  std::cout << "Printing matrix after Householder's method" << std::endl;
   for ( unsigned int i = 0 ; i < a.size() ; i++ ) {
     for ( unsigned int j = 0 ; j < a[0].size() ; j++ ) {
       std::cout << std::setw(15) << a[i][j] << " ";
@@ -153,33 +153,38 @@ std::vector<std::vector<double> > LinearAlgebra::householder (
       }
     }
   }
+  std::cout << "Matrix after Householder method:" << std::endl;
+  print_matrix(b_matrix);
   return b_matrix;
 }
 
 std::vector<std::vector<double> > LinearAlgebra::qrMethod (
                        std::vector<std::vector<double> > matrix ) {
-  double tol = 1e-12 , angle;
+  double tol , angle;
   std::vector<std::vector<double> > A=matrix , 
         P(matrix.size(),std::vector<double> (matrix.size())) , 
         Q(matrix.size(),std::vector<double> (matrix.size())) , 
         R(matrix.size(),std::vector<double> (matrix.size())) , 
         L(matrix.size(),std::vector<double> (matrix.size())) , 
         B(matrix.size(),std::vector<double> (matrix.size())) ;
-  unsigned int iter , i , k , j;
-  for ( iter = 0 ; iter < matrix.size() ; iter++ ) {
-    if ( upperTriangular(A) ) {
-      return A;
+  unsigned int iter=0 , i , k , j;
+  for ( i = 1 ; i < matrix.size() ; i++ ) {
+    for ( k = 0 ; k < i ; k++ ) {
+      tol = tol + A[i][k];
     }
-    std::cout<<1<<std::endl;
-    for ( i = 0 ; i < matrix.size() ; i++ ) {
-      std::cout<<1<<std::endl;
+  }
+  std::cout << "Sum of elements below diagonal iteration " << iter << ":"
+            << tol << std::endl;
+  while ( std::abs(tol) > 1e-12 ) {
+    tol = 0;
+    R = A;
+    for ( i = 0 ; i < matrix.size()-1 ; i++ ) {
       P = getIdentity((int)matrix.size());
-      //print_matrix(P);
       for ( k = 0 ; k < matrix.size() ; k++ ) {
         if ( k < i ) {
           continue;
         } else if ( k == i ) {
-          angle = std::atan2(A[k+1][k],A[k][k]);
+          angle = std::atan2(R[k+1][k],R[k][k]);
           P[k][k] = std::cos(angle);
           P[k+1][k] = -std::sin(angle);
           P[k][k+1] = std::sin(angle);
@@ -188,19 +193,41 @@ std::vector<std::vector<double> > LinearAlgebra::qrMethod (
           continue;
         }
       }
-      A = transpose(A);
-      print_matrix(P);
-      print_matrix(A);
+      R = transpose(R);
       for ( k = 0 ; k < matrix.size() ; k++ ) {
         for ( j = 0 ; j < matrix.size() ; j++ ) {
-          B[k][j] = dotProduct(P[k],A[j]);
-          std::cout << B[k][j] << " " << k << " " << j << std::endl;
+          B[k][j] = dotProduct(P[k],R[j]);
         }
       }
-      A = B;
-      std::cout << "Matrix after QR" << std::endl;
-      print_matrix(A);
+      R = B;
+      if ( i == 0 ) {
+        Q = transpose(P);
+      } else {
+        L = Q;
+        for ( k = 0 ; k < matrix.size() ; k++ ) {
+          for ( j = 0 ; j < matrix.size() ; j++ ) {
+            Q[k][j] = dotProduct(L[k],P[j]);
+          }
+        }
+      }
     }
-    return A;
+    Q = transpose(Q);
+    for ( k = 0 ; k < matrix.size() ; k++ ) {
+      for ( j = 0 ; j < matrix.size() ; j++ ) {
+        A[k][j] = dotProduct(R[k],Q[j]);
+      }
+    }
+    for ( i = 1 ; i < matrix.size() ; i++ ) {
+      for ( k = 0 ; k < i ; k++ ) {
+        tol = tol + A[i][k];
+      }
+    }
+    iter++;
+    std::cout << "Sum of elements below diagonal iteration " << iter << ":"
+              << tol << std::endl;
+
   }
+  std::cout << "Matrix after QR method:" << std::endl;
+  print_matrix(A);
+  return A;
 }

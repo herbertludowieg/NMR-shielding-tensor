@@ -84,6 +84,9 @@ int main( ) {
   int points;
   std::cout << "Enter number of points to use for the tensor plot: ";
   std::cin >> points;
+  std::cout << std::endl
+            << "===================================================="
+            << std::endl;
   
   tensor.PI(3.14159265359);
   tensor.init_theta_phi(points);
@@ -116,6 +119,8 @@ int main( ) {
     tensor.print_tensor(std::cout,i);
     data.close();
     tensor.points(coordinates,i);
+    std::cout << "*****************************************************"
+              << std::endl << std::endl;
   }
   return 0;
 }

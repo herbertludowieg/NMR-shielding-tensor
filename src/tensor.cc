@@ -132,24 +132,24 @@ void Tensor::points ( std::vector<double> coordinates , unsigned int ten_fn ) {
   dat_out.close();
   LinearAlgebra linear;
   //double a[] = {4,1,-2,2},b[] = {1,2,0,1},c[] = {-2,0,3,-2},d[] = {2,1,-2,-1};
-  double a[] = {3,1,0},b[]={1,3,1},c[]={0,1,3};
-  std::vector<std::vector<double> > matrix(3,std::vector<double>(3));
+  //double a[] = {3,1,0},b[]={1,3,1},c[]={0,1,3};
+  /*std::vector<std::vector<double> > matrix(3,std::vector<double>(3));
   
   for ( unsigned int i = 0 ; i < matrix.size() ; i++ ) {
     matrix[0][i] = a[i];
     matrix[1][i] = b[i];
     matrix[2][i] = c[i];
     //matrix[3][i] = d[i];
+  }*/
+  std::vector<double> e_values;
+  e_values = linear.eigenvalues(tensor_[ten_fn]);
+  /*similaritytrans = linear.householder(matrix);
+  similaritytrans = linear.qrMethod(matrix);*/
+  //std::cout << "Matrix after Householder's method"<<std::endl;
+  std::cout << "==================================================" 
+            << std::endl << "Eigenvalues:" << std::endl;
+  for ( unsigned int i = 0 ; i < e_values.size() ; i++ ) {
+      std::cout << std::setw(8) << e_values[i] << " ";
   }
-  std::vector<std::vector<double> > similaritytrans;
-  //similaritytrans = linear.householder(tensor_[ten_fn]);
-  similaritytrans = linear.householder(matrix);
-  similaritytrans = linear.qrMethod(matrix);
-  std::cout << "Matrix after Householder's method"<<std::endl;
-  for ( unsigned int i = 0 ; i < similaritytrans.size() ; i++ ) {
-    for ( unsigned int j = 0 ; j < similaritytrans[i].size() ; j++ ) {
-      std::cout << std::setw(8) << similaritytrans[i][j] << " ";
-    }
-    std::cout<<std::endl;
-  }
+  std::cout<<std::endl;
 }
