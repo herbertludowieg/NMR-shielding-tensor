@@ -149,7 +149,7 @@ void Tensor::points ( std::vector<double> coordinates , unsigned int ten_fn ) {
   std::cout << "==================================================" 
             << std::endl << "Eigenvalues:" << std::endl;
   for ( unsigned int i = 0 ; i < e_values.size() ; i++ ) {
-      std::cout << std::setw(8) << e_values[i] << " ";
+      std::cout << std::setw(15) << e_values[i] << " ";
   }
   std::cout<<std::endl;
 }
